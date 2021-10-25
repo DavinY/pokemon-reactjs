@@ -28,7 +28,6 @@ export const getAllPokemons = async () => {
 
 export const getNextPoke = async (url) => {
     const pokedata = await axios.get(url)
-    console.log(pokedata)
     const resultPokemon =
     {
         next: pokedata.data.next,

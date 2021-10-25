@@ -11,7 +11,6 @@ const ModalRelasePokemon = (props) => {
             "myPokemon",
             JSON.stringify(getMyPokemon().filter((pokemon) => pokemon.uniqueID !== props.mypoke.uniqueID))
         );
-        console.log("AA", JSON.stringify(getMyPokemon().filter((pokemon) => pokemon.uniqueID !== props.mypoke.uniqueID)))
         history.push("/myPokemon");
     }
     return (

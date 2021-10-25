@@ -20,7 +20,6 @@ const MyPokemonDetail = () => {
 
     useEffect(() => {
         const temp = getMyPokemon().filter((pokemon) => pokemon.uniqueID === id)
-        console.log(temp[0])
         setMyPokemon(temp[0])
         setDetailPoke(temp[0].detailPokemon)
         setTypes(temp[0].detailPokemon.types)

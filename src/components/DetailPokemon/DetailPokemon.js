@@ -26,11 +26,9 @@ const DetailPokemon = () => {
 
     useEffect(() => {
         getDetailPokemons(id).then(result => {
-            console.log("IDDD", result)
             setPokeDetail(result)
             setTypes(result.types)
             setStats(result.stats)
-            console.log("TYPESS", result.stats)
         })
     }, []);
 
@@ -46,7 +44,6 @@ const DetailPokemon = () => {
 
     const handleCatchPoke = () => {
         const randData = getRandom(0, 1);
-        console.log(randData)
         if (randData == 1) {
 
             setShowModalCatch(true)

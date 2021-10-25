@@ -13,7 +13,6 @@ const ListPokemon = () => {
 
     useEffect(() => {
         getAllPokemons().then(result => {
-            console.log("AA", result)
             setAllPokemons(result.data)
             setLoadMore(result.next)
         })
@@ -21,14 +20,11 @@ const ListPokemon = () => {
 
     const getNextPokemon = () => {
         getNextPoke(loadMore).then(result => {
-            console.log("LoadMore", result)
             setAllPokemons(currentList => currentList.concat(result.data))
             setLoadMore(result.next);
         })
     }
-    const showDetailPoke = (pokemon) => {
-        console.log("Detail Poke", pokemon)
-    }
+
     const initial = {
         y: 40,
         opacity: 0,
@@ -51,7 +47,6 @@ const ListPokemon = () => {
                                     initial={initial}
                                     animate={animate}
                                     transition={{ duration: 0.5 + index * 0.1 }}
-                                    onClick={() => { showDetailPoke(pokemon) }}
                                 >
                                     <FeatureImageWrapper>
                                         <PokeImg src={pokemon.image} />

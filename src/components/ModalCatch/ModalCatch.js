@@ -7,7 +7,6 @@ const ModalCatch = (props) => {
     const [nickname, setNickname] = useState("")
 
     const handleCatch = () => {
-        console.log("AA", props.poke)
         if (nickname.length > 0) {
             const newPoke = Object.assign(
                 {
@@ -17,7 +16,6 @@ const ModalCatch = (props) => {
             const myPokemon = getMyPokemon()
             myPokemon.push(newPoke);
             localStorage.setItem("myPokemon", JSON.stringify(myPokemon));
-            console.log("New Poke", JSON.parse(localStorage.getItem("myPokemon")))
             props.onHide(false);
         } else {
             window.alert("Please fill pokemon nickname")
