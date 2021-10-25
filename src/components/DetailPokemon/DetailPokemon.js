@@ -46,8 +46,9 @@ const DetailPokemon = () => {
 
     const handleCatchPoke = () => {
         const randData = getRandom(0, 1);
-        if (randData === 1) {
-            console.log(randData)
+        console.log(randData)
+        if (randData == 1) {
+
             setShowModalCatch(true)
         } else {
             setFailModalCatch(true)

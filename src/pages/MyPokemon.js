@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Column, Container, Row, Section, StyledLink } from '../globalStyles'
 import { getMyPokemon } from '../Helpers/getMyPokemon';
-import { PokeImg } from '../components/emotion/EmotionComponents';
+import { PokeImg } from '../components/Emotion/EmotionComponents';
 import { FeatureColumn, FeatureImageWrapper, FeatureName, ListPokeTextWrapper, ListPokeTitle, ListPokeWrapper } from '../components/ListPokemon/ListPokemonStyles';
 
 const MyPokemon = () => {

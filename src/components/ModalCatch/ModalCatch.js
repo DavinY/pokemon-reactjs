@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap'
 import { Heading } from './ModalCatchStyles'
 import { v4 as uuidv4 } from "uuid";
-import { usePokemonContext } from '../../context/PokemonContext';
+import { getMyPokemon } from '../../Helpers/getMyPokemon';
 const ModalCatch = (props) => {
     const [nickname, setNickname] = useState("")
-    const { myPokemon } = usePokemonContext();
 
     const handleCatch = () => {
         console.log("AA", props.poke)
@@ -15,7 +14,7 @@ const ModalCatch = (props) => {
                     name: nickname, uniqueID: uuidv4(), detailPokemon: props.poke
                 }
             )
-
+            const myPokemon = getMyPokemon()
             myPokemon.push(newPoke);
             localStorage.setItem("myPokemon", JSON.stringify(myPokemon));
             console.log("New Poke", JSON.parse(localStorage.getItem("myPokemon")))
@@ -43,7 +42,7 @@ const ModalCatch = (props) => {
                 <Form.Control size="lg" type="text" placeholder="Nickname" value={nickname} onChange={ev => setNickname(ev.target.value)} />
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={props.onHide}>Catch</Button>
+                <Button onClick={props.onHide}>Close</Button>
                 <Button onClick={() => handleCatch()}>Save</Button>
             </Modal.Footer>
         </Modal>

@@ -3,7 +3,7 @@ import { Column, Container, Row, Section, StyledLink } from '../../globalStyles'
 import { ButtonLoadMore, FeatureColumn, FeatureImageWrapper, FeatureName, ListPokeTextWrapper, ListPokeTitle, ListPokeWrapper } from './ListPokemonStyles'
 
 
-import { PokeImg } from '../emotion/EmotionComponents';
+import { PokeImg } from '../Emotion/EmotionComponents';
 import { getAllPokemons, getNextPoke } from '../../controller/PokemonController';
 import { ButtonWrapper } from '../MainContent/MainContentStyles';
 
