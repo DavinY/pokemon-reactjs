@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getDetailPokemons } from '../../controller/PokemonController'
-import { Button, Row } from '../../globalStyles'
+import { Button, Row, StyledLink } from '../../globalStyles'
 import { getRandom } from '../../utils/RenderUtils'
 import { ButtonWrapper } from '../MainContent/MainContentStyles'
 import { Card, ImageCard, TitleCard } from './PokeCardStyles'
@@ -26,12 +26,15 @@ const PokeCard = () => {
         <>
             {!loading ? (
                 <Card>
-                    <Row>
-                        <TitleCard >{pokemon?.name}</TitleCard>
-                    </Row>
-                    <Row>
-                        <ImageCard src={pokemon.sprites?.other['official-artwork'].front_default} />
-                    </Row>
+                    <StyledLink to={`/pokemon/${pokemon.id}`}>
+                        <Row>
+                            <TitleCard >{pokemon?.name}</TitleCard>
+                        </Row>
+                        <Row>
+                            <ImageCard src={pokemon.image} />
+                        </Row>
+                    </StyledLink>
+
                     <Row>
                         <ButtonWrapper>
                             <Button onClick={() => getPokemon()}>Find Another</Button>

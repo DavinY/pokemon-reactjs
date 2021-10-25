@@ -1,53 +1,34 @@
-import React from 'react'
-import { Container, Section } from '../../globalStyles'
-import { FeatureColumn, FeatureImageWrapper, FeatureName, FeatureText, ListPokeTextWrapper, ListPokeTitle, ListPokeWrapper } from './ListPokemonStyles'
+import React, { useEffect, useState } from 'react'
+import { Column, Container, Row, Section, StyledLink } from '../../globalStyles'
+import { ButtonLoadMore, FeatureColumn, FeatureImageWrapper, FeatureName, ListPokeTextWrapper, ListPokeTitle, ListPokeWrapper } from './ListPokemonStyles'
 
-import { BsFillShieldLockFill } from 'react-icons/bs';
-import { IoIosOptions } from 'react-icons/io';
-import { AiOutlineCloudUpload } from 'react-icons/ai';
-import { BiSupport, BiDollar } from 'react-icons/bi';
-import { GrHostMaintenance } from 'react-icons/gr';
-const iconStyle = (Icon) => <Icon size="3rem" color="#0f0f0f" />;
-const featuresData = [
-    {
-        name: 'Best Security',
-        description: 'We offer the best data security to our clients, which makes us stand out',
-        icon: iconStyle(BsFillShieldLockFill),
-        imgClass: 'one',
-    },
-    {
-        name: 'Ease of Use',
-        description: 'Our system is easy to use and integrate',
-        icon: iconStyle(IoIosOptions),
-        imgClass: 'two',
-    },
-    {
-        name: 'Maintenance',
-        description: 'Our code is written in highest standards, which makes it highly sustainable',
-        icon: iconStyle(GrHostMaintenance),
-        imgClass: 'three',
-    },
-    {
-        name: '24/7 Support',
-        description: 'Our team is available at all times in case you need us',
-        icon: iconStyle(BiSupport),
-        imgClass: 'four',
-    },
-    {
-        name: 'Price',
-        description: 'We offer the highest value/cost ratio',
-        icon: iconStyle(BiDollar),
-        imgClass: 'five',
-    },
-    {
-        name: 'Scalable',
-        description:
-            'Our servers are located all over the world, therefore improving scalability and speed ',
-        icon: iconStyle(AiOutlineCloudUpload),
-        imgClass: 'six',
-    },
-];
+
+import { PokeImg } from '../emotion/EmotionComponents';
+import { getAllPokemons, getNextPoke } from '../../controller/PokemonController';
+import { ButtonWrapper } from '../MainContent/MainContentStyles';
+
 const ListPokemon = () => {
+    const [allPokemons, setAllPokemons] = useState([])
+    const [loadMore, setLoadMore] = useState("https://pokeapi.co/api/v2/pokemon?limit=20")
+
+    useEffect(() => {
+        getAllPokemons().then(result => {
+            console.log("AA", result)
+            setAllPokemons(result.data)
+            setLoadMore(result.next)
+        })
+    }, [])
+
+    const getNextPokemon = () => {
+        getNextPoke(loadMore).then(result => {
+            console.log("LoadMore", result)
+            setAllPokemons(currentList => currentList.concat(result.data))
+            setLoadMore(result.next);
+        })
+    }
+    const showDetailPoke = (pokemon) => {
+        console.log("Detail Poke", pokemon)
+    }
     const initial = {
         y: 40,
         opacity: 0,
@@ -64,22 +45,44 @@ const ListPokemon = () => {
                         List Pokemon
                     </ListPokeTitle>
                     <ListPokeWrapper>
-                        {featuresData.map((el, index) => (
-                            <FeatureColumn
-                                initial={initial}
-                                animate={animate}
-                                transition={{ duration: 0.5 + index * 0.1 }}
-                                key={index}
-                            >
-                                <FeatureImageWrapper className={el.imgClass}>
-                                    {el.icon}
-                                </FeatureImageWrapper>
-                                <FeatureName>{el.name}</FeatureName>
-                                <FeatureText>{el.description}</FeatureText>
-                            </FeatureColumn>
+                        {allPokemons.map((pokemon, index) => (
+                            <StyledLink to={`/pokemon/${pokemon.id}`} key={index}>
+                                <FeatureColumn
+                                    initial={initial}
+                                    animate={animate}
+                                    transition={{ duration: 0.5 + index * 0.1 }}
+                                    onClick={() => { showDetailPoke(pokemon) }}
+                                >
+                                    <FeatureImageWrapper>
+                                        <PokeImg src={pokemon.image} />
+                                    </FeatureImageWrapper>
+                                    <Row>
+                                        <Column >
+                                            <FeatureName>{pokemon.name}</FeatureName>
+                                        </Column>
+                                    </Row>
+                                    <Row gap="1rem">
+                                        {pokemon.types.map((type, index) => (
+                                            <Column key={index}>
+                                                <FeatureName>{type.type.name}</FeatureName>
+                                            </Column>
+                                        ))}
+                                    </Row>
+                                </FeatureColumn>
+                            </StyledLink>
+
                         ))}
+
                     </ListPokeWrapper>
                 </ListPokeTextWrapper>
+                <Row>
+                    <ButtonWrapper >
+                        <ButtonLoadMore inverse onClick={() => getNextPokemon()}>
+                            Load More
+                        </ButtonLoadMore>
+                        {/* <Button onClick={() => getNextPokemon()}>Load More</Button> */}
+                    </ButtonWrapper>
+                </Row>
             </Container>
         </Section>
     )

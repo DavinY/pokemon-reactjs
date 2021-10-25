@@ -1,6 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 import styled from '@emotion/styled';
 
+import { Link } from "react-router-dom";
+
 const GlobalStyle = createGlobalStyle`
    *{
     box-sizing: border-box;
@@ -19,7 +21,8 @@ const GlobalStyle = createGlobalStyle`
 
 export const Container = styled.div`
 	width: 100%;
-	max-width: 1300px;
+	/* max-width: 1300px; */
+	/* background-color: red; */
 	margin-right: auto;
 	margin-left: auto;
 	padding: 0 50px;
@@ -73,7 +76,7 @@ export const MainHeading = styled.h1`
 `;
 
 export const Section = styled.section`
-	padding: ${({ padding }) => (padding ? padding : '140px 0')};
+	padding: ${({ padding }) => (padding ? padding : '50px 0')};
 	margin: ${({ margin }) => (margin ? margin : '')};
 	background: ${({ inverse }) => (inverse ? 'white' : '#071c2f')};
 	position: ${({ position }) => (position ? position : '')};
@@ -83,7 +86,7 @@ export const Section = styled.section`
 	height: ${({ height }) => (height ? height : 'auto')};
 	max-height: ${({ maxHeight }) => (maxHeight ? maxHeight : 'auto')};
 	min-height: ${({ minHeight }) => (minHeight ? minHeight : 'auto')};
-
+	/* background-color: aqua; */
 	@media screen and (max-width: 768px) {
 		padding: ${({ smPadding }) => (smPadding ? smPadding : '70px 0')};
 	}
@@ -123,4 +126,10 @@ export const Button = styled.button`
 		color: black;
 	}
 `;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+`;
+
 export default GlobalStyle

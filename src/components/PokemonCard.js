@@ -1,4 +1,4 @@
-import { DetailWrapper, PokeImg, ThumbContainer } from "./emotion/EmotionComponents"
+import { DetailWrapper, PokeImg, ThumbContainer } from "./Emotion/EmotionComponents"
 
 const PokemonCard = ({ id, image, name, type, _callback }) => {
     return (

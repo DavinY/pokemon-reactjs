@@ -15,8 +15,8 @@ export const getAllPokemons = async () => {
         const pokeDTO = {
             id: detailPoke.id,
             name: detailPoke.name,
-            image: detailPoke.sprites.other['official-artwork'].front_default,
-            type: detailPoke.types[0].type.name
+            image: detailPoke.image,
+            types: detailPoke.types
         }
         resultPokemon.data.push(pokeDTO)
 
@@ -40,8 +40,8 @@ export const getNextPoke = async (url) => {
         const pokeDTO = {
             id: detailPoke.id,
             name: detailPoke.name,
-            image: detailPoke.sprites.other['official-artwork'].front_default,
-            type: detailPoke.types[0].type.name
+            image: detailPoke.image,
+            types: detailPoke.types
         }
         resultPokemon.data.push(pokeDTO)
 
@@ -54,5 +54,13 @@ export const getNextPoke = async (url) => {
 export const getDetailPokemons = async (name) => {
     const url = process.env.REACT_APP_API + `pokemon/${name}`
     const result = await axios.get(url)
-    return result.data
+
+    const detailPokeDTO = {
+        id: result.data.id,
+        name: result.data.name,
+        image: result.data.sprites.other['official-artwork'].front_default,
+        types: result.data.types,
+        stats: result.data.stats,
+    }
+    return detailPokeDTO
 }
