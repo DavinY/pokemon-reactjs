@@ -3,9 +3,10 @@ import { Modal, Button, Form } from 'react-bootstrap'
 import { Heading } from './ModalCatchStyles'
 import { v4 as uuidv4 } from "uuid";
 import { getMyPokemon } from '../../Helpers/getMyPokemon';
+import { useHistory } from 'react-router';
 const ModalCatch = (props) => {
     const [nickname, setNickname] = useState("")
-
+    const history = useHistory();
     const handleCatch = () => {
         if (nickname.length > 0) {
             const newPoke = Object.assign(
@@ -16,7 +17,8 @@ const ModalCatch = (props) => {
             const myPokemon = getMyPokemon()
             myPokemon.push(newPoke);
             localStorage.setItem("myPokemon", JSON.stringify(myPokemon));
-            props.onHide(false);
+            window.alert("successful catching pokemon " + nickname)
+            history.push("/myPokemon");
         } else {
             window.alert("Please fill pokemon nickname")
         }
