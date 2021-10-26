@@ -20,7 +20,9 @@ const MyPokemon = () => {
         opacity: 1,
     };
     return (
-        <Section margin="6rem" inverse>
+        <Section inverse>
+            <br />
+            <br />
             <Container inverse>
                 <ListPokeTextWrapper>
                     <ListPokeTitle>
