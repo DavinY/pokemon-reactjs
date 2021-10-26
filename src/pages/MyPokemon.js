@@ -21,10 +21,10 @@ const MyPokemon = () => {
     };
     return (
         <Section inverse>
-            <br />
-            <br />
             <Container inverse>
                 <ListPokeTextWrapper>
+                    <br />
+                    <br />
                     <ListPokeTitle>
                         List Pokemon
                     </ListPokeTitle>
